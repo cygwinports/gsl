@@ -6,11 +6,11 @@ SUMMARY="the GNU Scientific Library"
 DESCRIPTION="the GNU Scientific Library, a collection of numerical routines for
 scientific computing. The library provides a wide range of mathematical routines
 such as random number generators, special functions and least-squares fitting."
-HOMEPAGE="http://www.gnu.org/software/gsl/";
-SRC_URI="mirror://gnu/gsl/gsl-${VERSION}.tar.gz";
+HOMEPAGE="http://www.gnu.org/software/gsl/"
+SRC_URI="mirror://gnu/gsl/gsl-${VERSION}.tar.gz"
 PATCH_URI="1.16-no-undefined.patch"
 
-PKG_NAMES="gsl libgsl0 libgsl-devel";
+PKG_NAMES="gsl libgsl0 libgsl-devel"
 gsl_CATEGORY="Science"
 gsl_OBSOLETES="gsl-apps gsl-doc"
 gsl_CONTENTS="usr/bin/gsl-[^c]* usr/share/doc/ usr/share/man/man1/gsl-[^c]*"
@@ -20,5 +20,5 @@ libgsl_devel_CONTENTS="usr/bin/gsl-config usr/include/ usr/lib/lib*
 	usr/lib/pkgconfig/ usr/share/aclocal/ usr/share/info/
 	usr/share/man/man1/gsl-config.1* usr/share/man/man3/"
 
-CYGCONF_ARGS="LIBS=-lblas";
+CYGCONF_ARGS="LIBS=-lblas"
 MAKEOPTS=-j1
