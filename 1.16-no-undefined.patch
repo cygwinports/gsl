@@ -1,0 +1,142 @@
+--- origsrc/gsl-1.16/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/Makefile.am	2013-08-14 21:29:46.292057700 +0200
+@@ -20,7 +20,7 @@ EXTRA_DIST = autogen.sh gsl-config.in gs
+ lib_LTLIBRARIES = libgsl.la
+ libgsl_la_SOURCES = version.c
+ libgsl_la_LIBADD = $(SUBLIBS)
+-libgsl_la_LDFLAGS = -version-info $(GSL_LT_VERSION)
++libgsl_la_LDFLAGS = -no-undefined -version-info $(GSL_LT_VERSION)
+ noinst_HEADERS = templates_on.h templates_off.h build.h
+ 
+ MINGW32_HOST = @MINGW32_HOST@
+--- origsrc/gsl-1.16/bspline/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/bspline/Makefile.am	2013-08-14 21:29:46.292057700 +0200
+@@ -12,6 +12,6 @@ check_PROGRAMS = test
+ 
+ TESTS = $(check_PROGRAMS)
+ 
+-test_LDADD = libgslbspline.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../cblas/libgslcblas.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la ../statistics/libgslstatistics.la
++test_LDADD = libgslbspline.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la ../statistics/libgslstatistics.la
+ 
+ test_SOURCES = test.c
+--- origsrc/gsl-1.16/cblas/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/cblas/Makefile.am	2013-08-14 21:29:46.292057700 +0200
+@@ -1,5 +1,5 @@
+ lib_LTLIBRARIES = libgslcblas.la
+-libgslcblas_la_LDFLAGS = -version-info $(GSL_LT_CBLAS_VERSION)
++libgslcblas_la_LDFLAGS = -no-undefined -version-info $(GSL_LT_CBLAS_VERSION)
+ 
+ MINGW32_HOST = @MINGW32_HOST@
+ if MINGW32_HOST
+--- origsrc/gsl-1.16/eigen/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/eigen/Makefile.am	2013-08-14 21:29:46.292057700 +0200
+@@ -11,7 +11,7 @@ noinst_HEADERS =  qrstep.c
+ 
+ TESTS = $(check_PROGRAMS)
+ 
+-test_LDADD = libgsleigen.la  ../test/libgsltest.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la  ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../sys/libgslsys.la ../err/libgslerr.la ../utils/libutils.la ../rng/libgslrng.la ../sort/libgslsort.la
++test_LDADD = libgsleigen.la  ../test/libgsltest.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la  ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../sys/libgslsys.la ../err/libgslerr.la ../utils/libutils.la ../rng/libgslrng.la ../sort/libgslsort.la
+ 
+ test_SOURCES = test.c
+ 
+--- origsrc/gsl-1.16/interpolation/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/interpolation/Makefile.am	2013-08-14 21:29:46.292057700 +0200
+@@ -10,7 +10,7 @@ INCLUDES = -I$(top_srcdir)
+ 
+ TESTS = $(check_PROGRAMS)
+ 
+-test_LDADD = libgslinterpolation.la ../poly/libgslpoly.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../cblas/libgslcblas.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
++test_LDADD = libgslinterpolation.la ../poly/libgslpoly.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
+ 
+ test_SOURCES = test.c
+ 
+--- origsrc/gsl-1.16/linalg/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/linalg/Makefile.am	2013-08-14 21:29:46.307657700 +0200
+@@ -12,7 +12,7 @@ TESTS = $(check_PROGRAMS)
+ 
+ check_PROGRAMS = test
+ 
+-test_LDADD = libgsllinalg.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../permutation/libgslpermutation.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
++test_LDADD = libgsllinalg.la ../blas/libgslblas.la ../permutation/libgslpermutation.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
+ 
+ test_SOURCES = test.c
+ 
+--- origsrc/gsl-1.16/multifit/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/multifit/Makefile.am	2013-08-14 21:29:46.307657700 +0200
+@@ -13,8 +13,8 @@ check_PROGRAMS = test #demo
+ TESTS = $(check_PROGRAMS)
+ 
+ test_SOURCES = test.c
+-test_LDADD = libgslmultifit.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../matrix/libgslmatrix.la ../sort/libgslsort.la ../statistics/libgslstatistics.la ../vector/libgslvector.la ../block/libgslblock.la  ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../utils/libutils.la ../sys/libgslsys.la
++test_LDADD = libgslmultifit.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../sort/libgslsort.la ../statistics/libgslstatistics.la ../vector/libgslvector.la ../block/libgslblock.la  ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../utils/libutils.la ../sys/libgslsys.la
+ 
+ #demo_SOURCES = demo.c
+-#demo_LDADD = libgslmultifit.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../randist/libgslrandist.la ../rng/libgslrng.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../utils/libutils.la ../sys/libgslsys.la
++#demo_LDADD = libgslmultifit.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../randist/libgslrandist.la ../rng/libgslrng.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../utils/libutils.la ../sys/libgslsys.la
+ 
+--- origsrc/gsl-1.16/multimin/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/multimin/Makefile.am	2013-08-14 21:29:46.307657700 +0200
+@@ -13,8 +13,8 @@ check_PROGRAMS = test #demo
+ TESTS = $(check_PROGRAMS) 
+ 
+ test_SOURCES = test.c test_funcs.c test_funcs.h
+-test_LDADD = libgslmultimin.la ../min/libgslmin.la ../poly/libgslpoly.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
++test_LDADD = libgslmultimin.la ../min/libgslmin.la ../poly/libgslpoly.la ../blas/libgslblas.la ../linalg/libgsllinalg.la ../permutation/libgslpermutation.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
+ 
+ #demo_SOURCES = demo.c 
+-#demo_LDADD = libgslmultimin.la ../min/libgslmin.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../linalg/libgsllinalg.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
++#demo_LDADD = libgslmultimin.la ../min/libgslmin.la ../blas/libgslblas.la ../linalg/libgsllinalg.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
+ 
+--- origsrc/gsl-1.16/multiroots/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/multiroots/Makefile.am	2013-08-14 21:29:46.307657700 +0200
+@@ -15,5 +15,5 @@ check_PROGRAMS = test
+ TESTS = $(check_PROGRAMS)
+ 
+ test_SOURCES = test.c test_funcs.c test_funcs.h
+-test_LDADD = libgslmultiroots.la ../linalg/libgsllinalg.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../permutation/libgslpermutation.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
++test_LDADD = libgslmultiroots.la ../linalg/libgsllinalg.la ../blas/libgslblas.la ../permutation/libgslpermutation.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
+ 
+--- origsrc/gsl-1.16/ode-initval/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/ode-initval/Makefile.am	2013-08-14 21:29:46.307657700 +0200
+@@ -12,7 +12,7 @@ check_PROGRAMS = test
+ 
+ TESTS = $(check_PROGRAMS)
+ 
+-test_LDADD = libgslodeiv.la ../linalg/libgsllinalg.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../matrix/libgslmatrix.la ../permutation/libgslpermutation.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la 
++test_LDADD = libgslodeiv.la ../linalg/libgsllinalg.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../permutation/libgslpermutation.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la 
+ 
+ test_SOURCES = test.c
+ 
+--- origsrc/gsl-1.16/ode-initval2/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/ode-initval2/Makefile.am	2013-08-14 21:29:46.307657700 +0200
+@@ -12,7 +12,7 @@ check_PROGRAMS = test
+ 
+ TESTS = $(check_PROGRAMS)
+ 
+-test_LDADD = libgslodeiv2.la ../linalg/libgsllinalg.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../matrix/libgslmatrix.la ../permutation/libgslpermutation.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la 
++test_LDADD = libgslodeiv2.la ../linalg/libgsllinalg.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../permutation/libgslpermutation.la ../vector/libgslvector.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la 
+ 
+ test_SOURCES = test.c
+ 
+--- origsrc/gsl-1.16/specfunc/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/specfunc/Makefile.am	2013-08-14 21:29:46.307657700 +0200
+@@ -12,7 +12,7 @@ TESTS = $(check_PROGRAMS)
+ 
+ check_PROGRAMS = test
+ 
+-test_LDADD = libgslspecfunc.la ../eigen/libgsleigen.la ../linalg/libgsllinalg.la  ../sort/libgslsort.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
++test_LDADD = libgslspecfunc.la ../eigen/libgsleigen.la ../linalg/libgsllinalg.la  ../sort/libgslsort.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../blas/libgslblas.la ../block/libgslblock.la ../complex/libgslcomplex.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
+ 
+ test_SOURCES = test_sf.c test_sf.h test_airy.c test_bessel.c test_coulomb.c test_dilog.c test_gamma.c test_hyperg.c test_legendre.c test_mathieu.c
+   
+--- origsrc/gsl-1.16/wavelet/Makefile.am	2013-07-17 22:04:26.000000000 +0200
++++ src/gsl-1.16/wavelet/Makefile.am	2013-08-14 21:29:46.323257700 +0200
+@@ -10,7 +10,7 @@ check_PROGRAMS = test
+ 
+ TESTS = $(check_PROGRAMS)
+ 
+-test_LDADD = libgslwavelet.la ../blas/libgslblas.la ../cblas/libgslcblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
++test_LDADD = libgslwavelet.la ../blas/libgslblas.la ../matrix/libgslmatrix.la ../vector/libgslvector.la ../block/libgslblock.la ../ieee-utils/libgslieeeutils.la  ../err/libgslerr.la ../test/libgsltest.la ../sys/libgslsys.la ../utils/libutils.la
+ 
+ test_SOURCES = test.c
+ 

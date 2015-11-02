@@ -1,0 +1,23 @@
+NAME="gsl"
+VERSION=1.16
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="the GNU Scientific Library"
+DESCRIPTION="the GNU Scientific Library, a collection of numerical routines for
+scientific computing. The library provides a wide range of mathematical routines
+such as random number generators, special functions and least-squares fitting."
+HOMEPAGE="http://www.gnu.org/software/gsl/";
+SRC_URI="mirror://gnu/gsl/gsl-${VERSION}.tar.gz";
+PATCH_URI="1.16-no-undefined.patch"
+
+PKG_NAMES="gsl gsl-apps gsl-devel gsl-doc";
+gsl_CONTENTS='usr/bin/cyggsl*-0.dll';
+gsl_apps_CATEGORY="Science"
+gsl_apps_CONTENTS='usr/bin/gsl-histogram.exe usr/bin/gsl-randist.exe';
+gsl_devel_CONTENTS="usr/share/aclocal/ usr/bin/gsl-config usr/include/ \
+                 usr/lib/lib* usr/lib/pkgconfig/";
+gsl_doc_CATEGORY="Doc"
+gsl_doc_CONTENTS='etc/ usr/share/doc/ usr/share/info/ usr/share/man';
+
+CYGCONF_ARGS="LIBS=-lblas";
+MAKEOPTS=-j1
