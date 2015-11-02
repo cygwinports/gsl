@@ -1,6 +1,6 @@
 NAME="gsl"
 VERSION=1.16
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="the GNU Scientific Library"
 DESCRIPTION="the GNU Scientific Library, a collection of numerical routines for
@@ -10,14 +10,15 @@ HOMEPAGE="http://www.gnu.org/software/gsl/";
 SRC_URI="mirror://gnu/gsl/gsl-${VERSION}.tar.gz";
 PATCH_URI="1.16-no-undefined.patch"
 
-PKG_NAMES="gsl gsl-apps gsl-devel gsl-doc";
-gsl_CONTENTS='usr/bin/cyggsl*-0.dll';
-gsl_apps_CATEGORY="Science"
-gsl_apps_CONTENTS='usr/bin/gsl-histogram.exe usr/bin/gsl-randist.exe';
-gsl_devel_CONTENTS="usr/share/aclocal/ usr/bin/gsl-config usr/include/ \
-                 usr/lib/lib* usr/lib/pkgconfig/";
-gsl_doc_CATEGORY="Doc"
-gsl_doc_CONTENTS='etc/ usr/share/doc/ usr/share/info/ usr/share/man';
+PKG_NAMES="gsl libgsl0 libgsl-devel";
+gsl_CATEGORY="Science"
+gsl_OBSOLETES="gsl-apps gsl-doc"
+gsl_CONTENTS="usr/bin/gsl-[^c]* usr/share/doc/ usr/share/man/man1/gsl-[^c]*"
+libgsl0_CONTENTS='usr/bin/cyggsl*-0.dll'
+libgsl_devel_OBSOLETES="gsl-devel"
+libgsl_devel_CONTENTS="usr/bin/gsl-config usr/include/ usr/lib/lib*
+	usr/lib/pkgconfig/ usr/share/aclocal/ usr/share/info/
+	usr/share/man/man1/gsl-config.1* usr/share/man/man3/"
 
 CYGCONF_ARGS="LIBS=-lblas";
 MAKEOPTS=-j1
