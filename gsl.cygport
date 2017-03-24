@@ -1,6 +1,6 @@
 NAME="gsl"
 VERSION=2.3
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="the GNU Scientific Library"
 DESCRIPTION="the GNU Scientific Library, a collection of numerical routines for
@@ -48,6 +48,7 @@ src_install() {
 	cd ${B}
 	cyginstall
 
-	echo "#include <cblas.h>" > ${D}/usr/include/gsl/gsl_cblas.h
+	includeinto gsl
+	doinclude ${S}/cblas/gsl_cblas.h
 	dosym libblas.dll.a /usr/lib/libgslcblas.dll.a
 }
