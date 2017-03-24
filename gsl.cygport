@@ -1,6 +1,6 @@
 NAME="gsl"
-VERSION=1.16
-RELEASE=2
+VERSION=2.3
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="the GNU Scientific Library"
 DESCRIPTION="the GNU Scientific Library, a collection of numerical routines for
@@ -9,19 +9,45 @@ such as random number generators, special functions and least-squares fitting."
 HOMEPAGE="http://www.gnu.org/software/gsl/"
 SRC_URI="mirror://gnu/gsl/gsl-${VERSION}.tar.gz"
 PATCH_URI="
-	http://pkgs.fedoraproject.org/cgit/gsl.git/plain/gsl-bug39055.patch
-	1.16-no-undefined.patch
+	http://pkgs.fedoraproject.org/cgit/gsl.git/plain/gsl-tol.patch
+	http://pkgs.fedoraproject.org/cgit/gsl.git/plain/gsl-test.patch
+	2.3-system-blas.patch
 "
 
-PKG_NAMES="gsl libgsl0 libgsl-devel"
+CYGPORT_USE_UNSTABLE_API=1
+src_patch_hook() {
+	sed -i -e 's|cblas/libgslcblas.la|-lblas|' Makefile.am
+	sed -i -e 's|\.\./cblas/libgslcblas.la|-lblas|' */Makefile.am
+	sed -i -e 's|\.\./\.\./cblas/libgslcblas.la|-lblas|' doc/examples/Makefile.am
+}
+
+PKG_NAMES="gsl libgsl19 libgsl-devel"
 gsl_CATEGORY="Science"
 gsl_OBSOLETES="gsl-apps gsl-doc"
-gsl_CONTENTS="usr/bin/gsl-[^c]* usr/share/doc/ usr/share/man/man1/gsl-[^c]*"
-libgsl0_CONTENTS='usr/bin/cyggsl*-0.dll'
+gsl_CONTENTS="
+	usr/bin/gsl-[^c]*
+	usr/share/doc/
+	usr/share/man/man1/gsl-[^c]*
+"
+libgsl19_CONTENTS="usr/bin/cyggsl-19.dll"
 libgsl_devel_OBSOLETES="gsl-devel"
-libgsl_devel_CONTENTS="usr/bin/gsl-config usr/include/ usr/lib/lib*
-	usr/lib/pkgconfig/ usr/share/aclocal/ usr/share/info/
-	usr/share/man/man1/gsl-config.1* usr/share/man/man3/"
+libgsl_devel_REQUIRES="liblapack-devel"
+libgsl_devel_CONTENTS="
+	usr/bin/gsl-config
+	usr/include/gsl/
+	usr/lib/libgsl.dll.a
+	usr/lib/libgslcblas.dll.a
+	usr/lib/pkgconfig/gsl.pc
+	usr/share/aclocal/gsl.m4
+	usr/share/info/gsl-ref.info*
+	usr/share/man/man1/gsl-config.1*
+	usr/share/man/man3/gsl.3*
+"
 
-CYGCONF_ARGS="LIBS=-lblas"
-MAKEOPTS=-j1
+src_install() {
+	cd ${B}
+	cyginstall
+
+	echo "#include <cblas.h>" > ${D}/usr/include/gsl/gsl_cblas.h
+	dosym libblas.dll.a /usr/lib/libgslcblas.dll.a
+}
